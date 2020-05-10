@@ -4,7 +4,7 @@
   "description": "Not Boggle",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --exit --require test/injectGlobal.js"
+    "test": "mocha --recursive --exit"
   },
   "author": "Ari Bolton",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "url": "https://github.com/ariwbolton/noggle.git"
   },
   "dependencies": {
+    "chai": "^4.2.0",
     "mocha": "^7.1.2"
   }
 }
