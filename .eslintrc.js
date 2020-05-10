@@ -1,5 +1,3 @@
-'use strict'
-
 /* eslint-disable */
 module.exports = {
     "env": {
@@ -9,9 +7,11 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018,
+        "sourceType": "module"
     },
     "plugins": [
+        "import",
         "implicit-dependencies"
     ],
     "rules": {
@@ -65,6 +65,13 @@ module.exports = {
             {
                 "MemberExpression": 0,
                 "SwitchCase": 1
+            }
+        ],
+        "import/no-unresolved": [
+            2,
+            {
+                commonjs: true,
+                amd: true
             }
         ],
         "key-spacing": 2,

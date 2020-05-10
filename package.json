@@ -17,6 +17,7 @@
     "chai": "^4.2.0",
     "eslint": "^7.0.0",
     "eslint-plugin-implicit-dependencies": "^1.0.4",
+    "eslint-plugin-import": "^2.20.2",
     "mocha": "^7.1.2"
   }
 }
