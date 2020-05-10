@@ -1,4 +1,4 @@
-import * as deepFreeze from 'deep-freeze'
+import deepFreeze from 'deep-freeze'
 
 export default deepFreeze({
     dictionaryPrefixTree: {

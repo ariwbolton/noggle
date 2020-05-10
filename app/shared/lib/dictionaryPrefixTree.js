@@ -15,7 +15,7 @@ import config from '../../config'
 function createDictionaryPrefixTrie(props) {
     const fileContents = fs.readFileSync(props.filename, 'utf8')
 
-    const lines = _.split(fileContents, '\n')
+    const lines = _.split(fileContents, '\r\n')
     const words = _.slice(lines, 2)
 }
 

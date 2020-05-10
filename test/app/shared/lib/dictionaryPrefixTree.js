@@ -4,9 +4,9 @@ import { createDictionaryPrefixTrie } from '../../../../app/shared/lib/dictionar
 describe('dictionaryPrefixTree', function() {
     describe('createDictionaryPrefixTrie', function() {
         it('should load from a file', function() {
-            const dictionaryPrefixTree = createDictionaryPrefixTrie(config)
+            const dictionaryPrefixTree = createDictionaryPrefixTrie(config.dictionaryPrefixTree)
 
-            expect(true).to.be.true()
+            expect(true).to.be.true
         })
     })
 })
