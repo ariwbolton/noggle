@@ -4,21 +4,17 @@
 module.exports = {
     "env": {
         "es6": true,
-        "node": true
+        "node": true,
+        "mocha": true,
     },
     "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 2018
     },
     "plugins": [
-        "dependencies",
         "implicit-dependencies"
     ],
     "rules": {
-        "dependencies/case-sensitive": 2,
-        "dependencies/no-cycles": 2,
-        "dependencies/no-unresolved": 2,
-        "dependencies/require-json-ext": 2,
         "block-scoped-var": 2,
         "brace-style": [
             2,
