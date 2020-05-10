@@ -4,7 +4,7 @@
   "description": "Not Boggle",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --exit",
+    "test": "mocha --recursive --exit --require test/injectGlobal.js",
     "lint": "eslint ."
   },
   "author": "Ari Bolton",
@@ -19,5 +19,10 @@
     "eslint-plugin-implicit-dependencies": "^1.0.4",
     "eslint-plugin-import": "^2.20.2",
     "mocha": "^7.1.2"
+  },
+  "dependencies": {
+    "deep-freeze": "0.0.1",
+    "lodash": "^4.17.15",
+    "trie-prefix-tree": "^1.5.1"
   }
 }
