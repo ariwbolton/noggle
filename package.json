@@ -9,7 +9,10 @@
   "author": "Ari Bolton",
   "license": "ISC",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/ariwbolton/noggle.git"
+    "type": "git",
+    "url": "https://github.com/ariwbolton/noggle.git"
+  },
+  "dependencies": {
+    "mocha": "^7.1.2"
   }
 }
