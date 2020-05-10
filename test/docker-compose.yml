@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  pgdb:
+    image: library/postgres:12.2
+    ports:
+      - "5444:5432"
+    environment:
+      POSTGRES_USER: noggle
+      POSTGRES_DB: noggle_db
+    volumes:
+      - test_pgdb_data:/var/lib/postgresql/data
+
+volumes:
+  test_pgdb_data:
