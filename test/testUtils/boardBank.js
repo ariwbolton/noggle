@@ -2,9 +2,16 @@ import deepFreeze from 'deep-freeze'
 
 import NoggleGame from '../../app/shared/lib/Noggle/NoggleGame'
 
+/* eslint-disable key-spacing */
 const BOARD_STRINGS = deepFreeze({
-    defaultBoard: 'A,B,C,D|E,F,G,H|I,J,K,L|M,N,O,P'
+    default:                'A,B,C,D|E,F,G,H|I,J,K,L|M,N,O,P',
+    tooManyRows:            'A,B,C,D|A,B,C,D|E,F,G,H|I,J,K,L|M,N,O,P',
+    tooFewRows:             'E,F,G,H|I,J,K,L|M,N,O,P',
+    tooManyItemsInRow:      'A,B,C,D,E|E,F,G,H|I,J,K,L|M,N,O,P',
+    tooFewItemsInRow:       'A,B,C|E,F,G,H|I,J,K,L|M,N,O,P',
+    invalidCharacter:       '1,2,3,4|E,F,G,H|I,J,K,L|M,N,O,P',
 })
+/* eslint-enable key-spacing */
 
 export default class NoggleBoardBank {
     static get boardStrings() {

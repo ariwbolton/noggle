@@ -3,9 +3,12 @@ import _ from 'lodash'
 import dictionaryPrefixTree from '../dictionaryPrefixTree'
 import NoggleCell from './NoggleCell'
 
+const ITEM_SEPARATOR = ','
+const ROW_SEPARATOR = '\\|'
 const CHARACTER_REGEX = /[A-Z]/
-const ROW_REGEX = new RegExp(`${CHARACTER_REGEX.source},${CHARACTER_REGEX.source},${CHARACTER_REGEX.source},${CHARACTER_REGEX.source}`)
-const BOARD_REGEX = new RegExp(`${ROW_REGEX.source}|${ROW_REGEX.source}|${ROW_REGEX.source}|${ROW_REGEX.source}`)
+const ROW_REGEX = new RegExp(_.join(_.times(4, () => CHARACTER_REGEX.source), ITEM_SEPARATOR))
+const SUBSTRING_BOARD_REGEX = new RegExp(_.join(_.times(4, () => ROW_REGEX.source), ROW_SEPARATOR))
+const BOARD_REGEX = new RegExp(`^${SUBSTRING_BOARD_REGEX.source}$`)
 
 export function fastArrayPrefixMatch(targetArray, prefixCellArray) {
     return prefixCellArray.every(function(prefixCell, index) {
@@ -38,21 +41,23 @@ export default class NoggleGame {
      * @returns {NoggleGame}
      */
     static createFromBoardString(stringBoard) {
-        if (!BOARD_REGEX.match(stringBoard)) {
+        if (!BOARD_REGEX.test(stringBoard)) {
             throw new Error('Malformed board!')
         }
 
+        const self = this
+
         const stringRows = _.split(stringBoard, '|')
-        const stringRowsChars = _.map(stringRows, rowString => _.split(rowString, ','))
+        const stringRowsChars = _.map(stringRows, stringRow => _.split(stringRow, ','))
 
         // Initialize board
         const board = []
 
-        _.each(stringRows, function(stringRow, rowIndex) {
+        _.each(stringRowsChars, function(stringRowChars, rowIndex) {
             const row = []
 
-            _.each(stringRowsChars, function(stringChar, colIndex) {
-                const cell = new NoggleCell(this, stringChar, rowIndex, colIndex)
+            _.each(stringRowChars, function(stringChar, colIndex) {
+                const cell = new NoggleCell(self, stringChar, rowIndex, colIndex)
 
                 row.push(cell)
             })
@@ -79,7 +84,7 @@ export default class NoggleGame {
     }
 
     getCellList() {
-        return _.concat(this.board)
+        return _.flatMap(this.board)
     }
 
     /**
@@ -144,7 +149,7 @@ export default class NoggleGame {
 
                 currentPath.pop()
                 currentSet.delete(neighborCell)
-                
+
                 if (foundMatch) {
                     anyMatchFound = true
                     shouldContinue = false
