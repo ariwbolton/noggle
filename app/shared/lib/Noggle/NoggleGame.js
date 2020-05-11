@@ -142,11 +142,13 @@ export default class NoggleGame {
 
                 const foundMatch = self._recurse(wordCapsArray, currentPath, currentSet)
 
+                currentPath.pop()
+                currentSet.delete(neighborCell)
+                
                 if (foundMatch) {
                     anyMatchFound = true
                     shouldContinue = false
                 }
-
             }
 
             return shouldContinue
