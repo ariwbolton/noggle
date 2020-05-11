@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "Not Boggle",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "mocha --recursive --exit --require test/injectGlobal.js --require @babel/register",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "backend:start": "node app/backend/server.js"
   },
   "author": "Ari Bolton",
   "license": "ISC",
