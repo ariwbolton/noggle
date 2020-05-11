@@ -6,7 +6,9 @@ import NoggleGame from '../../app/shared/lib/Noggle/NoggleGame'
 /* eslint-disable key-spacing */
 const BOARD_STRINGS = deepFreeze({
     default:                'A,B,C,D|E,F,G,H|I,J,K,L|M,N,O,P',
-    duplicates:                'A,B,A,D|A,F,G,H|I,J,K,L|M,N,O,P',
+    duplicates:             'A,B,A,D|A,F,G,H|I,J,K,L|M,N,O,P',
+    q:                      'Q,Q,C,D|E,F,Q,H|I,J,K,L|M,N,O,P',
+    qu:                     'Q,Q,C,D|U,F,Q,H|I,J,K,L|M,N,O,P',
 
     // Invalid boards
     tooManyRows:            'A,B,C,D|A,B,C,D|E,F,G,H|I,J,K,L|M,N,O,P',

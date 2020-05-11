@@ -10,6 +10,9 @@ const ROW_REGEX = new RegExp(_.join(_.times(4, () => CHARACTER_REGEX.source), IT
 const SUBSTRING_BOARD_REGEX = new RegExp(_.join(_.times(4, () => ROW_REGEX.source), ROW_SEPARATOR))
 const BOARD_REGEX = new RegExp(`^${SUBSTRING_BOARD_REGEX.source}$`)
 
+const INVALID_Q_WORD_REGEX = /Q(?!U)/
+const QU_REGEX = /QU/g
+
 export function fastArrayPrefixMatch(targetArray, prefixCellArray) {
     return prefixCellArray.every(function(prefixCell, index) {
         return targetArray[index] === prefixCell.character
@@ -102,7 +105,20 @@ export default class NoggleGame {
             throw new Error('Can only check if isWordPossible for strings')
         }
 
-        const wordCapsArray = _.toArray(_.toUpper(word))
+        if (word.length === 0) {
+            throw new Error('Cannot search for an empty string')
+        }
+
+        const wordCaps = _.toUpper(word)
+
+        // Check if Q is followed by something other than a U
+        // Not allowed in Noggle!
+        if (INVALID_Q_WORD_REGEX.test(wordCaps)) {
+            return false
+        }
+
+        const wordCapsWithQUReplaced = wordCaps.replace(QU_REGEX, 'Q')
+        const wordCapsArray = _.toArray(wordCapsWithQUReplaced)
         const cellList = this.getCellList()
         const self = this
 
