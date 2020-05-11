@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import deepFreeze from 'deep-freeze'
 
 import NoggleGame from '../../app/shared/lib/Noggle/NoggleGame'
@@ -18,7 +19,8 @@ export default class NoggleBoardBank {
         return BOARD_STRINGS
     }
 
-    static getBoard(boardName) {
+    static getBoard(_boardName) {
+        const boardName = _.defaultTo(_boardName, 'default')
         const boardString = NoggleBoardBank.boardStrings[boardName]
 
         if (!boardString) {

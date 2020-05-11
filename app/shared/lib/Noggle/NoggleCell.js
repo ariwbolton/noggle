@@ -19,13 +19,13 @@ const DIRECTION_DELTAS = [
 export default class NoggleCell {
     /**
      *
-     * @param {NoggleGame} noggle
+     * @param {NoggleGame} game
      * @param {String} character
      * @param {Integer} rowIndex
      * @param {Integer} colIndex
      */
-    constructor(noggle, character, rowIndex, colIndex) {
-        this.noggle = noggle
+    constructor(game, character, rowIndex, colIndex) {
+        this.game = game
         this.character = character
         this.rowIndex = rowIndex
         this.colIndex = colIndex
@@ -34,16 +34,17 @@ export default class NoggleCell {
     get neighbors() {
         // Lazy load neighbors
         if (!this._neighbors) {
+            const self = this
             const neighborCells = []
 
             // Try each direction, only keep the neighbors we find
             _.each(DIRECTION_DELTAS, function(directionDelta) {
                 const [deltaRow, deltaCol] = directionDelta
-                const possibleNeighborRow = this.rowIndex + deltaRow
-                const possibleNeighborCol = this.colIndex + deltaCol
+                const possibleNeighborRow = self.rowIndex + deltaRow
+                const possibleNeighborCol = self.colIndex + deltaCol
 
-                if (this.isValidCoords(possibleNeighborRow, possibleNeighborCol)) {
-                    neighborCells.push(this.noggle.getCell(possibleNeighborRow, possibleNeighborCol))
+                if (self.game.isValidCoords(possibleNeighborRow, possibleNeighborCol)) {
+                    neighborCells.push(self.game.getCell(possibleNeighborRow, possibleNeighborCol))
                 }
             })
 

@@ -17,13 +17,16 @@ export function fastArrayPrefixMatch(targetArray, prefixCellArray) {
 }
 
 export default class NoggleGame {
+    constructor() {
+        // Empty constructor because the intent is to use setBoard
+    }
+
     /**
-     *
-     * @param {Object} props
-     * @param {NoggleCell[][]} props.board
+     * Should be called immediately after construction
+     * @param {NoggleCell[][]} board
      */
-    constructor(props) {
-        this.board = props.board
+    setBoard(board) {
+        this.board = board
         this.size = this.board.length
     }
 
@@ -45,19 +48,18 @@ export default class NoggleGame {
             throw new Error('Malformed board!')
         }
 
-        const self = this
-
         const stringRows = _.split(stringBoard, '|')
         const stringRowsChars = _.map(stringRows, stringRow => _.split(stringRow, ','))
 
         // Initialize board
         const board = []
+        const game = new NoggleGame()
 
         _.each(stringRowsChars, function(stringRowChars, rowIndex) {
             const row = []
 
             _.each(stringRowChars, function(stringChar, colIndex) {
-                const cell = new NoggleCell(self, stringChar, rowIndex, colIndex)
+                const cell = new NoggleCell(game, stringChar, rowIndex, colIndex)
 
                 row.push(cell)
             })
@@ -65,7 +67,9 @@ export default class NoggleGame {
             board.push(row)
         })
 
-        return new NoggleGame({ board })
+        game.setBoard(board)
+
+        return game
     }
 
     isValidCoords(rowIndex, colIndex) {

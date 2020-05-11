@@ -1,6 +1,24 @@
+import _ from 'lodash'
+
+import boardBank from '../../../../testUtils/boardBank'
+
 describe('NoggleCell', function() {
+    let game
+
+    beforeEach(function() {
+        game = boardBank.getBoard()
+    })
+
     it('should get correct neighbors for a cell in the middle', function() {
-        throw new Error('not implemented')
+        const cell = game.getCell(1, 1)
+        const neighbors = cell.neighbors
+        const expectedNeighbors = 'ABCEGIJK'
+
+        expect(neighbors.length).to.equal(expectedNeighbors.length)
+        _.each(neighbors, function(neighbor) {
+            const foundCharacter = _.includes(expectedNeighbors, neighbor.character)
+            expect(foundCharacter).to.be.true
+        })
     })
 
     it('should get correct neighbors for a cell on the top', function() {
