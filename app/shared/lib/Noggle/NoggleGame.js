@@ -98,6 +98,10 @@ export default class NoggleGame {
      * @return {boolean}
      */
     isWordPossible(word) {
+        if (!_.isString(word)) {
+            throw new Error('Can only check if isWordPossible for strings')
+        }
+
         const wordCapsArray = _.toArray(_.toUpper(word))
         const cellList = this.getCellList()
         const self = this
