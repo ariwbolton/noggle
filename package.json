@@ -21,7 +21,8 @@
     "eslint": "^7.0.0",
     "eslint-plugin-implicit-dependencies": "^1.0.4",
     "eslint-plugin-import": "^2.20.2",
-    "mocha": "^7.1.2"
+    "mocha": "^7.1.2",
+    "regenerator-runtime": "^0.13.5"
   },
   "dependencies": {
     "deep-freeze": "0.0.1",
