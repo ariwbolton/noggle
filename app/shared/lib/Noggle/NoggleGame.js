@@ -1,17 +1,23 @@
+import fs from 'fs'
+
 import _ from 'lodash'
 
 import dictionaryPrefixTree from '../dictionaryPrefixTree.js'
 import NoggleCell from './NoggleCell.js'
 
 const ITEM_SEPARATOR = ','
-const ROW_SEPARATOR = '\\|'
+const ROW_SEPARATOR = '|'
+const ROW_SEPARATOR_REGEX = new RegExp(`\\${ROW_SEPARATOR}`)
 const CHARACTER_REGEX = /[A-Z]/
 const ROW_REGEX = new RegExp(_.join(_.times(4, () => CHARACTER_REGEX.source), ITEM_SEPARATOR))
-const SUBSTRING_BOARD_REGEX = new RegExp(_.join(_.times(4, () => ROW_REGEX.source), ROW_SEPARATOR))
+const SUBSTRING_BOARD_REGEX = new RegExp(_.join(_.times(4, () => ROW_REGEX.source), ROW_SEPARATOR_REGEX.source))
 const BOARD_REGEX = new RegExp(`^${SUBSTRING_BOARD_REGEX.source}$`)
 
 const INVALID_Q_WORD_REGEX = /Q(?!U)/
 const QU_REGEX = /QU/g
+
+const OLD_NOGGLE_DICE = JSON.parse(fs.readFileSync('./data/old-noggle-dice.json', 'utf8'))
+const NEW_NOGGLE_DICE = JSON.parse(fs.readFileSync('./data/new-noggle-dice.json', 'utf8'))
 
 export function fastArrayPrefixMatch(targetArray, prefixCellArray) {
     return prefixCellArray.every(function(prefixCell, index) {
@@ -21,7 +27,7 @@ export function fastArrayPrefixMatch(targetArray, prefixCellArray) {
 
 export default class NoggleGame {
     constructor() {
-        // Empty constructor because the intent is to use setBoard
+        // Empty constructor because the intent is to use setBoard after construction
     }
 
     /**
@@ -31,6 +37,30 @@ export default class NoggleGame {
     setBoard(board) {
         this.board = board
         this.size = this.board.length
+    }
+
+    /**
+     * Generate a random board, and create
+     *
+     * @param {String} [diceIdentifier='new']
+     */
+    static createRandom(diceIdentifier = 'newDice') {
+        let dice
+
+        if (diceIdentifier === 'newDice') {
+            dice = NEW_NOGGLE_DICE
+        } else if (diceIdentifier === 'oldDice') {
+            dice = OLD_NOGGLE_DICE
+        } else {
+            throw new Error(`Unknown dice identifier '${diceIdentifier}'`)
+        }
+
+        const diceOrder = _.shuffle(_.times(dice.length))
+
+        const chars = _.map(diceOrder, (dieIndex) => _.sample(dice[dieIndex]))
+        const charArrays = _.chunk(chars, 4)
+
+        return NoggleGame.createFromCharArrays(charArrays)
     }
 
     /**
@@ -54,7 +84,16 @@ export default class NoggleGame {
         const stringRows = _.split(stringBoard, '|')
         const stringRowsChars = _.map(stringRows, stringRow => _.split(stringRow, ','))
 
-        // Initialize board
+        return NoggleGame.createFromCharArrays(stringRowsChars)
+    }
+
+    /**
+     *
+     * @param {char[][]}stringRowsChars
+     *
+     * @return {NoggleGame}
+     */
+    static createFromCharArrays(stringRowsChars) {
         const board = []
         const game = new NoggleGame()
 
@@ -92,6 +131,16 @@ export default class NoggleGame {
 
     getCellList() {
         return _.flatMap(this.board)
+    }
+
+    getBoardString() {
+        const rowStrings = _.map(this.board, function(row) {
+            const characters = _.map(row, cell => cell.character)
+
+            return _.join(characters, ITEM_SEPARATOR)
+        })
+
+        return _.join(rowStrings, ROW_SEPARATOR)
     }
 
     /**

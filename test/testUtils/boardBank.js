@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import deepFreeze from 'deep-freeze'
 
-import NoggleGame from '../../app/shared/lib/Noggle/NoggleGame'
+import NoggleGame from '../../app/shared/lib/Noggle/NoggleGame.js'
 
 /* eslint-disable key-spacing */
 const BOARD_STRINGS = deepFreeze({
