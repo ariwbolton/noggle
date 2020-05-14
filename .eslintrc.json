@@ -1,5 +1,4 @@
-/* eslint-disable */
-module.exports = {
+{
     "env": {
         "es6": true,
         "node": true,
@@ -70,8 +69,8 @@ module.exports = {
         "import/no-unresolved": [
             2,
             {
-                commonjs: true,
-                amd: true
+                "commonjs": true,
+                "amd": true
             }
         ],
         "key-spacing": 2,

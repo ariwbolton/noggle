@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha --recursive --exit --require test/injectGlobal.js --require @babel/register",
+    "test": "mocha --recursive --exit",
     "lint": "eslint .",
     "backend:start": "node app/backend/server.js"
   },
@@ -16,15 +16,11 @@
     "url": "https://github.com/ariwbolton/noggle.git"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/register": "^7.9.0",
     "chai": "^4.2.0",
     "eslint": "^7.0.0",
     "eslint-plugin-implicit-dependencies": "^1.0.4",
     "eslint-plugin-import": "^2.20.2",
-    "mocha": "^7.1.2",
-    "regenerator-runtime": "^0.13.5"
+    "mocha": "^7.1.2"
   },
   "dependencies": {
     "@hapi/hapi": "^19.1.1",
