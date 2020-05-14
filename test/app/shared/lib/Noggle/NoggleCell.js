@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import boardBank from '../../../../testUtils/boardBank'
+import boardBank from '../../../../testUtils/boardBank.js'
 
 describe('NoggleCell', function() {
     let game

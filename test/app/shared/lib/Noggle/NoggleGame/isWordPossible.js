@@ -1,4 +1,4 @@
-import boardBank from '../../../../../testUtils/boardBank'
+import boardBank from '../../../../../testUtils/boardBank.js'
 
 describe('isWordPossible', function() {
     it('should find strings in a board', function() {

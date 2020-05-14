@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
-import dictionaryPrefixTree from '../dictionaryPrefixTree'
-import NoggleCell from './NoggleCell'
+import dictionaryPrefixTree from '../dictionaryPrefixTree.js'
+import NoggleCell from './NoggleCell.js'
 
 const ITEM_SEPARATOR = ','
 const ROW_SEPARATOR = '\\|'

@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
-import boardBank from '../../../../../testUtils/boardBank'
-import NoggleGame from '../../../../../../app/shared/lib/Noggle/NoggleGame'
+import boardBank from '../../../../../testUtils/boardBank.js'
+import NoggleGame from '../../../../../../app/shared/lib/Noggle/NoggleGame.js'
 
 describe('createFromBoardString', function() {
     it('should create a board from a board string', function() {

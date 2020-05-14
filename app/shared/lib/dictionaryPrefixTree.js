@@ -3,7 +3,7 @@ import fs from 'fs'
 import _ from 'lodash'
 import trie from 'trie-prefix-tree'
 
-import config from '../../config'
+import config from '../../config.js'
 
 /**
  *

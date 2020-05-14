@@ -1,8 +1,8 @@
 import Hapi from '@hapi/hapi'
 
-import config from '../config'
+import config from '../config.js'
 
-import routeGamesPost from './routes/games/post'
+import routeGamesPost from './routes/games/post.js'
 
 /**
  *

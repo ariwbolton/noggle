@@ -1,5 +1,5 @@
-import config from '../../../../app/config'
-import dictionaryPrefixTree, { createDictionaryPrefixTrie } from '../../../../app/shared/lib/dictionaryPrefixTree'
+import config from '../../../../app/config.js'
+import dictionaryPrefixTree, { createDictionaryPrefixTrie } from '../../../../app/shared/lib/dictionaryPrefixTree.js'
 
 describe('dictionaryPrefixTree', function() {
     describe('createDictionaryPrefixTrie', function() {
