@@ -1,7 +1,6 @@
 import Hapi from '@hapi/hapi'
 
 import config from '../config.js'
-
 import routeGamesPost from './routes/games/post.js'
 
 /**
@@ -39,19 +38,4 @@ export default async function initServer() {
     }
 
     return server
-}
-
-if (!module.parent) {
-    (async function() {
-        const server = await initServer()
-
-        process.on('SIGTERM', async function() {
-            try {
-                await server.stop({ timeout: 10 * 1000 }) // 10 seconds
-            } catch (err) {
-                console.error('An error occurred while stopping the server', err)
-                process.exit(1)
-            }
-        })
-    })()
 }

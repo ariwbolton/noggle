@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha --recursive --exit",
     "lint": "eslint .",
-    "backend:start": "node app/backend/server.js"
+    "backend:start": "node bin/server.js"
   },
   "author": "Ari Bolton",
   "license": "ISC",
