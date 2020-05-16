@@ -9,12 +9,9 @@ import config from '../config.js'
 import routeGamesPost from './http/games/post.js'
 import routeIndex from './http/index.js'
 
-
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
 /**
- *
- * @param [options] Hapi.Server.options: https://github.com/hapijs/hapi/blob/master/API.md#server.options
  *
  * @returns {Promise<Hapi.Server>}
  */
@@ -30,7 +27,7 @@ export async function initHttpServer() {
 
     await server.register(Inert)
 
-    server.ext('onPreResponse', function(request, h) {
+    server.ext('onPreResponse', function(request) {
         if (request.response.isBoom) {
             request.response.output.payload = {
                 error: {
