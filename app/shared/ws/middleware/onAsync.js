@@ -2,7 +2,7 @@ export default function onAsync(socket, next) {
     console.log('Registering onAsync middleware... [being implemented]')
     const on = socket.on
 
-    socket.on = (event, handler, ...args) => {
+    socket.onAsync = (event, handler, ...args) => {
         const newHandler = async (...handlerArgs) => {
             console.log('in new handler')
             let cb = null
@@ -47,5 +47,7 @@ export default function onAsync(socket, next) {
         on.call(socket, event, newHandler, ...args)
     }
 
-    next()
+    if (next) {
+        next()
+    }
 }

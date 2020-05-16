@@ -13,12 +13,11 @@ import ReactDom from 'react-dom'
 
 import socket from './socketIoConfig'
 
-const requestGreeting = () => {
+const requestGreeting = async () => {
     console.log('Requesting greeting!')
-    socket.emit('greeting.request', (greeting) => {
-        console.log('Received greeting!')
-        console.log(greeting)
-    })
+    const greeting = await socket.emitAsync('greeting.request', [], { wait: true })
+    console.log('Received greeting!')
+    console.log(greeting)
 }
 
 const App = () => {

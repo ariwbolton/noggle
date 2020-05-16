@@ -1,6 +1,9 @@
 import _ from 'lodash'
 import io from 'socket.io-client'
 
+import emitAsync from '../shared/ws/middleware/emitAsync.js'
+import onAsync from '../shared/ws/middleware/onAsync.js'
+
 // Uncomment to enable socketio debugging
 localStorage.debug = ''
 
@@ -29,5 +32,8 @@ _.each(socketEventNames, function(eventName) {
         console.log(`${eventName}: ${data}`)
     })
 })
+
+emitAsync(socket)
+onAsync(socket)
 
 export default socket

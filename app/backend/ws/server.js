@@ -33,7 +33,7 @@ export default async function initWsServer(httpServer) {
         console.log(`Connected! ${socket.id}`)
 
         _.each(handlers, function({ name, handler }) {
-            socket.on(name, handler)
+            socket.onAsync(name, handler)
         })
 
         socket.on('disconnect', () => {
