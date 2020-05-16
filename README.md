@@ -19,8 +19,7 @@
 1. Add Socket.io
     - Use async/await by using [Socket.io-as-promised](https://www.npmjs.com/package/socket.io-as-promised)
     - Potentially take implementation and copy to avoid unnecessary dependencies
-1. Remove Hapi.dev
-1. Use Webpack for frontend (and backend?)
+1. Use Webpack for backend?
 1. Figure out how to implement UUID primary keys in Postgres
 1. Pick Postgres ORM
 1. Implement backend API
@@ -71,3 +70,7 @@
             1. Constraints
                 1. UNIQUE (game_assignment_id, word)
                 1. word is lower case
+                
+### Backlog
+
+1. Specify React version in eslint-plugin-react settings
