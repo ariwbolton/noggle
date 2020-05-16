@@ -1,6 +1,8 @@
+import Bluebird from 'bluebird'
+
 export default {
     name: 'greeting.request',
-    handler: function(response) {
-        response('Hello!')
+    handler: function() {
+        return 'hello!!'
     }
 }

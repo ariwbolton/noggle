@@ -30,9 +30,4 @@ _.each(socketEventNames, function(eventName) {
     })
 })
 
-socket.on('counter', (data, callback) => {
-    console.log('Received data', data)
-    callback('thanks!')
-})
-
 export default socket

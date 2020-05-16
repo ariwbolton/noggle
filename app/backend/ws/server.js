@@ -2,13 +2,15 @@ import _ from 'lodash'
 import SocketIOServer from 'socket.io'
 
 // Middleware Imports
-import emitAsyncMiddleware from './middleware/emitAsyncMiddleware.js'
+import emitAsync from '../../shared/ws/middleware/emitAsync.js'
+import onAsync from '../../shared/ws/middleware/onAsync.js'
 
 // Handler Imports
 import greetingHandlerConfig from './handlers/greeting.js'
 
 const middlewares = [
-    emitAsyncMiddleware
+    emitAsync,
+    onAsync
 ]
 
 const handlers = [
@@ -36,6 +38,11 @@ export default async function initWsServer(httpServer) {
 
         socket.on('disconnect', () => {
             console.log(`Disconnected. ${socket.id}`)
+        })
+
+        socket.on('error', (value) => {
+            console.log('bad error!!!!')
+            console.log(`Error! ${value}`)
         })
     })
 

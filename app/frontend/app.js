@@ -11,10 +11,22 @@ import './static/site.webmanifest'
 import React from 'react'
 import ReactDom from 'react-dom'
 
-import './socketIoConfig'
+import socket from './socketIoConfig'
+
+const requestGreeting = () => {
+    console.log('Requesting greeting!')
+    socket.emit('greeting.request', (greeting) => {
+        console.log('Received greeting!')
+        console.log(greeting)
+    })
+}
 
 const App = () => {
-    return <p>Hello!!</p>
+    return (
+        <button onClick={requestGreeting}>
+            Request Greeting
+        </button>
+    )
 }
 
 ReactDom.render(<App />, document.getElementById('app'))
