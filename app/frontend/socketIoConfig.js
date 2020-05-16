@@ -1,10 +1,33 @@
+import _ from 'lodash'
 import io from 'socket.io-client'
 
-export default io('http://localhost:5299', {
+// Uncomment to enable socketio debugging
+// localStorage.debug = '*'
+
+const socket = io('http://localhost:5299', {
     transports: ['websocket'],
     // autoConnect: false,
 })
 
-// manager.open((result) => {
-//     console.log('Result:', result)
-// })
+const socketEventNames = [
+    'connect',
+    'connect_error',
+    'connect_timeout',
+    'error',
+    'disconnect',
+    'reconnect',
+    'reconnect_attempt',
+    'reconnecting',
+    'reconnect_error',
+    'reconnect_failed',
+    'ping',
+    'pong'
+]
+
+_.each(socketEventNames, function(eventName) {
+    socket.on(eventName, function(data) {
+        console.log(`${eventName}: ${data}`)
+    })
+})
+
+export default socket

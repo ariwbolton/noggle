@@ -13,12 +13,6 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist', 'frontend')
     },
-    devServer: {
-        proxy: {
-            '/': 'http://localhost:3000'
-        },
-        port: 3002
-    },
     mode: 'development',
     devtool: 'source-map',
     plugins: [
