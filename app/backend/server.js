@@ -62,7 +62,7 @@ export async function initHttpServer() {
 export async function initWsServer(httpServer) {
     const io = new SocketIOServer(httpServer.listener, {
         // Engine.io options
-        transports: ['websockets']
+        transports: ['websocket']
     })
 
     io.on('connection', socket => {
