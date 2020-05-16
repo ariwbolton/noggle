@@ -1,8 +1,6 @@
 import _ from 'lodash'
 
 export default function onAsync(socket, next) {
-    console.log('Registering emitAsync middleware...')
-
     /**
      *
      * @param {String} event

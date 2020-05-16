@@ -1,7 +1,12 @@
 export default function onAsync(socket, next) {
-    console.log('Registering onAsync middleware... [being implemented]')
     const on = socket.on
 
+    /**
+     *
+     * @param {String} event
+     * @param {Function} handler
+     * @param {Object} args
+     */
     socket.onAsync = (event, handler, ...args) => {
         const newHandler = async (...handlerArgs) => {
             console.log('in new handler')
