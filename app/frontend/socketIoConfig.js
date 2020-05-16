@@ -1,6 +1,10 @@
 import io from 'socket.io-client'
 
-io('http://localhost:5299', {
+export default io('http://localhost:5299', {
     transports: ['websocket'],
-    autoConnect: false,
+    // autoConnect: false,
 })
+
+// manager.open((result) => {
+//     console.log('Result:', result)
+// })
