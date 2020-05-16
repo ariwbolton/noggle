@@ -2,7 +2,7 @@ import _ from 'lodash'
 import io from 'socket.io-client'
 
 // Uncomment to enable socketio debugging
-// localStorage.debug = '*'
+localStorage.debug = ''
 
 const socket = io('http://localhost:5299', {
     transports: ['websocket'],
@@ -28,6 +28,11 @@ _.each(socketEventNames, function(eventName) {
     socket.on(eventName, function(data) {
         console.log(`${eventName}: ${data}`)
     })
+})
+
+socket.on('counter', (data, callback) => {
+    console.log('Received data', data)
+    callback('thanks!')
 })
 
 export default socket
