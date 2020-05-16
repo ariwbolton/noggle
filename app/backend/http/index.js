@@ -1,7 +1,11 @@
 export default {
     method: 'GET',
-    path: '/',
+    path: '/{param*}',
     handler: {
-        file: 'index.html'
+        directory: {
+            path: '.',
+            redirectToSlash: true,
+            index: true
+        }
     }
 }

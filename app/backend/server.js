@@ -6,7 +6,6 @@ import Inert from '@hapi/inert'
 import SocketIOServer from 'socket.io'
 
 import config from '../config.js'
-import routeGamesPost from './http/games/post.js'
 import routeIndex from './http/index.js'
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
@@ -20,7 +19,7 @@ export async function initHttpServer() {
         port: config.backend.port,
         routes: {
             files: {
-                relativeTo: path.join(__dirname, 'http/static')
+                relativeTo: path.join(__dirname, '..', '..', 'dist', 'frontend')
             }
         }
     })
@@ -42,7 +41,6 @@ export async function initHttpServer() {
 
     // Routes
     server.route(routeIndex)
-    server.route(routeGamesPost)
 
     try {
         console.log('Starting HTTP server...')
