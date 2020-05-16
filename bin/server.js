@@ -1,4 +1,4 @@
-import initServers from '../app/backend/server.js'
+import initServers from '../app/backend/servers.js'
 
 // TODO: Look into top-level await
 // https://github.com/tc39/proposal-top-level-await#implementations

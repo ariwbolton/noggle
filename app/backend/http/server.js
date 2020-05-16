@@ -3,10 +3,9 @@ import url from 'url'
 
 import Hapi from '@hapi/hapi'
 import Inert from '@hapi/inert'
-import SocketIOServer from 'socket.io'
 
-import config from '../config.js'
-import routeIndex from './http/index.js'
+import config from '../../config.js'
+import routeIndex from './routes/index.js'
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
@@ -14,12 +13,12 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
  *
  * @returns {Promise<Hapi.Server>}
  */
-export async function initHttpServer() {
+export default async function initHttpServer() {
     const server = new Hapi.Server({
         port: config.backend.port,
         routes: {
             files: {
-                relativeTo: path.join(__dirname, '..', '..', 'dist', 'frontend')
+                relativeTo: path.join(__dirname, '..', '..', '..', 'dist', 'frontend')
             }
         }
     })
@@ -52,31 +51,4 @@ export async function initHttpServer() {
     }
 
     return server
-}
-
-export async function initWsServer(httpServer) {
-    const io = new SocketIOServer(httpServer.listener, {
-        // Engine.io options
-        transports: ['websocket']
-    })
-
-    io.on('connection', socket => {
-        console.log(`Connected! ${socket.id}`)
-
-        socket.on('disconnect', () => {
-            console.log(`Disconnected. ${socket.id}`)
-        })
-    })
-
-    return io
-}
-
-export default async function initServers() {
-    const httpServer = await initHttpServer()
-    const socketIoServer = initWsServer(httpServer)
-
-    return {
-        http: httpServer,
-        io: socketIoServer
-    }
 }
