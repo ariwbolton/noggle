@@ -32,7 +32,7 @@
         1. `user.login`
         1. `user.create` (Ari only)
         1. `user.stats`
-        1. `user.game`
+        1. `user.game.get`
     1. /room namespace
         1. `room.get` - Get room. Throws if not in the room
         1. `room.create` - Must not be an active room owned by the user. Persists

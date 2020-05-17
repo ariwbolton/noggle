@@ -22,7 +22,7 @@ function getRandomLoginCode() {
 }
 
 export default class User {
-    constructor({ username, loginCode }) {
+    constructor({ username, loginCode } = {}) {
         this.id = uuidv4()
         this.username = username || getRandomUsername()
         this.loginCode = loginCode || getRandomLoginCode()

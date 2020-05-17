@@ -1,5 +1,5 @@
 export default {
-    name: 'user.game',
+    name: 'user.game.get',
     handler: async function(request) {
         // Needs authentication
         // User needs to have been in game at some point
