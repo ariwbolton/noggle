@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 export default function onAsync(socket, next) {
     const on = socket.on
 
@@ -9,7 +11,6 @@ export default function onAsync(socket, next) {
      */
     socket.onAsync = (event, handler, ...args) => {
         const newHandler = async (...handlerArgs) => {
-            console.log('in new handler')
             let cb = null
 
             if (typeof handlerArgs[handlerArgs.length - 1] === 'function') {
@@ -19,13 +20,22 @@ export default function onAsync(socket, next) {
             let result = null
             let error = null
 
+            const requestLogger = socket.logger.child({
+                name: 'socket-request',
+                event,
+                requestId: uuidv4()
+            })
+
             try {
-                result = await handler.call(socket, handlerArgs, socket)
+                result = await handler.call(socket, {
+                    args: handlerArgs,
+                    socket,
+                    logger: requestLogger
+                })
             } catch (err) {
                 error = err
 
-                console.error(`'${event}' error!`)
-                console.error(err)
+                requestLogger.error(err)
             }
 
             let errorResponse = null

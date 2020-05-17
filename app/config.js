@@ -6,5 +6,6 @@ export default deepFreeze({
     },
     backend: {
         port: 5299
-    }
+    },
+    logLevel: 'debug'
 })

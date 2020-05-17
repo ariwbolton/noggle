@@ -4,13 +4,15 @@ import SocketIOServer from 'socket.io'
 // Middleware Imports
 import emitAsync from '../../shared/ws/middleware/emitAsync.js'
 import onAsync from '../../shared/ws/middleware/onAsync.js'
+import pino from '../../shared/ws/middleware/pino.js'
 
 // Handler Imports
 import greetingHandlerConfig from './handlers/greeting.js'
 
 const middlewares = [
     emitAsync,
-    onAsync
+    onAsync,
+    pino
 ]
 
 const handlers = [
@@ -30,19 +32,18 @@ export default async function initWsServer(httpServer) {
 
     // Handlers
     io.on('connection', socket => {
-        console.log(`Connected! ${socket.id}`)
+        socket.logger.debug('Connected!')
 
         _.each(handlers, function({ name, handler }) {
             socket.onAsync(name, handler)
         })
 
         socket.on('disconnect', () => {
-            console.log(`Disconnected. ${socket.id}`)
+            socket.logger.debug('Disconnected.')
         })
 
         socket.on('error', (value) => {
-            console.log('bad error!!!!')
-            console.log(`Error! ${value}`)
+            socket.logger.error(value)
         })
     })
 
