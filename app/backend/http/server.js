@@ -5,6 +5,7 @@ import Hapi from '@hapi/hapi'
 import Inert from '@hapi/inert'
 
 import config from '../../config.js'
+import logger from '../../shared/lib/Logger.js'
 import routeIndex from './routes/index.js'
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
@@ -42,11 +43,12 @@ export default async function initHttpServer() {
     server.route(routeIndex)
 
     try {
-        console.log('Starting HTTP server...')
+        logger.info('Starting HTTP server...')
         await server.start()
-        console.log('Started!')
+        logger.info('Started!')
     } catch (err) {
-        console.error('Problem during startup error; server should now exit', err)
+        logger.error('Problem during startup error; server should now exit', err)
+
         throw err
     }
 
