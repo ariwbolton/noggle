@@ -8,23 +8,73 @@ import './static/favicon-32x32.png'
 import './static/site.webmanifest'
 
 // App + React
-import React from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import React, { useState } from 'react'
 import ReactDom from 'react-dom'
 
 import socket from './socketIoConfig'
 
-const requestSystemAliveStatus = async () => {
-    console.log('Requesting alive status!')
-    const aliveStatus = await socket.emitAsync('system.alive', [], { wait: true })
-    console.log('Received alive status!')
-    console.log(aliveStatus)
+const requesterFactory = (event, args, responseHandler) => {
+    return async () => {
+        console.log(`Requesting ${event}`)
+        const response = await socket.emitAsync(event, args, { wait: true })
+        console.log(`Received ${event} results!`)
+        console.log(response)
+        responseHandler(response)
+    }
 }
 
 const App = () => {
+    const [ioState, setIOState] = useState(socket.connected ? 'connected' : 'disconnected')
+    const [loginState, setLoginState] = useState('unauthenticated')
+    const [aliveStatus, setAliveStatus] = useState('unknown')
+
+    const loginHandler = requesterFactory('user.login', [{ id: uuidv4() }], (response) => {
+        const result = response.meta.status === 'success' ? 'authenticated' : 'unauthenticated'
+
+        setLoginState(result)
+    })
+    const aliveHandler = requesterFactory('system.alive', [], (response) => {
+        const status = response.meta.status === 'success' ? 'alive' : 'dead'
+
+        setAliveStatus(status)
+    })
+
     return (
-        <button onClick={requestSystemAliveStatus}>
-            Request Greeting
-        </button>
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            IO state
+                        </td>
+                        <td>
+                            { ioState }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onClick={loginHandler}>
+                                Login
+                            </button>
+                        </td>
+                        <td>
+                            { loginState }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onClick={aliveHandler}>
+                                Alive
+                            </button>
+                        </td>
+                        <td>
+                            { aliveStatus }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     )
 }
 

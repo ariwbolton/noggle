@@ -9,6 +9,7 @@ import pino from '../../shared/ws/middleware/pino.js'
 // Handler Imports
 import systemAliveHandler from './handlers/system/alive.js'
 import systemReadyHandler from './handlers/system/ready.js'
+import userLoginHandler from './handlers/user/login.js'
 
 const middlewares = [
     pino,
@@ -18,7 +19,8 @@ const middlewares = [
 
 const handlers = [
     systemAliveHandler,
-    systemReadyHandler
+    systemReadyHandler,
+    userLoginHandler
 ]
 
 export default async function initWsServer(httpServer) {
