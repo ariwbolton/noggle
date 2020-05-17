@@ -32,7 +32,6 @@
         1. `user.login`
         1. `user.create` (Ari only)
         1. `user.stats`
-        1. `user.history`
         1. `user.game`
     1. /room namespace
         1. `room.get` - Get room. Throws if not in the room
@@ -40,21 +39,20 @@
         1. `room.delete` - Persists
         1. `room.invite.create` - Invite users. Triggers notification to users. Persists
         1. `room.invite.accept` - Persists
-        1. `room.user.remove` - Remove users. Triggers notification. Persists
-        1. `room.user.leave` - Remove users. Triggers notification. Persists
-    1. /game namespace
-        1. `game.get` - Get game. Throws if not in the game
-        1. `game.initialize` - Requires room. Fails if user is not in the room. Notifies all in room
-        1. `game.player.readyup` -
+        1. `room.assignment.delete` - Remove users. Triggers notification. Persists
+    1. /room/game namespace
+        1. `room.game.get` - Get game. Throws if not in the game
+        1. `room.game.create` - Requires room. Fails if user is not in the room. Notifies all in room
+        1. `room.game.start` - Only room owner can start. Only starts with users who have readyup-ed. Notifies all in room.
+        1. `room.game.assignment.readyup` -
             1. Fails if user is not in game, user has already readyup-ed, user has already left
             1. Notifies all in room
-        1. `game.player.leave` - Fails if user is not in game.
-        1. `game.start` - Only room owner can start. Only starts with users who have readyup-ed. Notifies all in room.
-        1. `game.word.add`
+        1. `room.game.assignment.leave` - Fails if user is not in game.
+        1. `room.game.assignment.word.create`
             - Word must be unique
             - Word must be on the board
             - Game must be active
-        1. `game.word.remove`
+        1. `room.game.assignment.word.delete`
             - Word must already be submitted
             - Game must be active
 1. Implement frontend handlers

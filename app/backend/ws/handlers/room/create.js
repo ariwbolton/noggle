@@ -1,9 +1,9 @@
 export default {
     name: 'room.create',
-    handler: async function([name], socket) {
-        socket.join(name, (err) => {
-            console.log(`Error joining room with name: ${name}`)
-            console.log(err)
-        })
+    handler: async function(request) {
+        // Needs authentication
+        // User needs to not be in any other rooms
+        // Create room
+        // Join room
     }
 }
