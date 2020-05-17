@@ -7,16 +7,18 @@ import onAsync from '../../shared/ws/middleware/onAsync.js'
 import pino from '../../shared/ws/middleware/pino.js'
 
 // Handler Imports
-import greetingHandlerConfig from './handlers/greeting.js'
+import systemAliveHandler from './handlers/system/alive.js'
+import systemReadyHandler from './handlers/system/ready.js'
 
 const middlewares = [
+    pino,
     emitAsync,
-    onAsync,
-    pino
+    onAsync
 ]
 
 const handlers = [
-    greetingHandlerConfig
+    systemAliveHandler,
+    systemReadyHandler
 ]
 
 export default async function initWsServer(httpServer) {
@@ -34,8 +36,8 @@ export default async function initWsServer(httpServer) {
     io.on('connection', socket => {
         socket.logger.debug('Connected!')
 
-        _.each(handlers, function({ name, handler }) {
-            socket.onAsync(name, handler)
+        _.each(handlers, function({ name, handler, options }) {
+            socket.onAsync(name, handler, options)
         })
 
         socket.on('disconnect', () => {

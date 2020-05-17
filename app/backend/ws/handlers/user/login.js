@@ -1,7 +1,12 @@
 export default {
     name: 'user.login',
+    options: {
+        auth: 'optional'
+    },
     handler: async function(request) {
-        // Does NOT need authentication
-        // Authenticates socket for user
+        // TODO: Develop more sophisticated login scheme...
+        const [userId] = request.args
+
+        request.socket.userId = userId
     }
 }

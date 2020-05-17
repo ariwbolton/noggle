@@ -1,13 +1,13 @@
 import _ from 'lodash'
 
-export default function onAsync(socket, next) {
+export default function emitAsync(socket, next) {
     /**
      *
      * @param {String} event
      * @param {Object[]} args
      * @param {Object} options
      * @param {Object} options.wait
-     * @param {Object} [options.timeout=2000]
+     * @param {Integer} [options.timeout=2000]
      */
     socket.emitAsync = async (event, args, options) => {
         let emitPromise
@@ -20,9 +20,9 @@ export default function onAsync(socket, next) {
                     resolve(response)
                 })
 
-                setTimeout(timeout, () => {
+                setTimeout(() => {
                     reject(new Error('Callback was never called'))
-                })
+                }, timeout)
             })
         } else {
             emitPromise = new Promise(function(resolve) {
