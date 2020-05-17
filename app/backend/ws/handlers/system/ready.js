@@ -1,7 +1,9 @@
 export default {
     name: 'system.ready',
+    options: {
+        auth: 'optional'
+    },
     handler: function(request) {
-        // No Auth
         // TODO: Check database
         return 'ready'
     }

@@ -13,16 +13,16 @@ import ReactDom from 'react-dom'
 
 import socket from './socketIoConfig'
 
-const requestGreeting = async () => {
-    console.log('Requesting greeting!')
-    const greeting = await socket.emitAsync('greeting.request', [], { wait: true })
-    console.log('Received greeting!')
-    console.log(greeting)
+const requestSystemAliveStatus = async () => {
+    console.log('Requesting alive status!')
+    const aliveStatus = await socket.emitAsync('system.alive', [], { wait: true })
+    console.log('Received alive status!')
+    console.log(aliveStatus)
 }
 
 const App = () => {
     return (
-        <button onClick={requestGreeting}>
+        <button onClick={requestSystemAliveStatus}>
             Request Greeting
         </button>
     )

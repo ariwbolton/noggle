@@ -34,12 +34,12 @@ export default function onAsync(socket, next) {
             let cb = null
 
             try {
-                if (options.auth === 'required' && _.isNil(socket.userId)) {
-                    throw new Error('Unauthenticated')
-                }
-
                 if (typeof handlerArgs[handlerArgs.length - 1] === 'function') {
                     cb = handlerArgs.pop()
+                }
+
+                if (options.auth === 'required' && _.isNil(socket.userId)) {
+                    throw new Error('Unauthenticated')
                 }
 
                 result = await handler.call(socket, {
