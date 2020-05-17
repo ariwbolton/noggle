@@ -20,7 +20,7 @@ export default function onAsync(socket, next) {
             let error = null
 
             try {
-                result = await handler.apply(null, handlerArgs)
+                result = await handler.call(socket, handlerArgs, socket)
             } catch (err) {
                 error = err
 
