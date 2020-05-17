@@ -49,6 +49,10 @@ export default async function initWsServer(httpServer) {
         socket.on('error', (value) => {
             socket.logger.error(value)
         })
+
+        setTimeout(() => {
+            socket.disconnect(true)
+        }, 2000)
     })
 
     return io

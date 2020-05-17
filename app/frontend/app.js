@@ -9,7 +9,7 @@ import './static/site.webmanifest'
 
 // App + React
 import { v4 as uuidv4 } from 'uuid'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDom from 'react-dom'
 
 import socket from './socketIoConfig'
@@ -40,13 +40,33 @@ const App = () => {
         setAliveStatus(status)
     })
 
+    useEffect(() => {
+        setIOState(socket.connected ? 'connected' : 'disconnected')
+
+        const connectHandler = () => setIOState('connected')
+        const disconnectHandler = () => setIOState('disconnected')
+
+        socket.on('connect', connectHandler)
+        socket.on('disconnect', disconnectHandler)
+
+        return () => {
+            console.log('unregistering handlers')
+            socket.off('connect', connectHandler)
+            socket.off('disconnect', disconnectHandler)
+        }
+    }, [])
+
     return (
         <div>
             <table>
                 <tbody>
                     <tr>
                         <td>
-                            IO state
+                            <button onClick={() => {
+                                socket.connect()
+                            }}>
+                                Connect
+                            </button>
                         </td>
                         <td>
                             { ioState }
