@@ -9,7 +9,7 @@ import './static/site.webmanifest'
 
 // App + React
 import { v4 as uuidv4 } from 'uuid'
-import React, { useState, useEffect } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import ReactDom from 'react-dom'
 
 import socket from './socketIoConfig'
@@ -24,27 +24,45 @@ const requesterFactory = (event, args, responseHandler) => {
     }
 }
 
+const defaultState = {
+    io: 'disconnected',
+    login: 'unauthenticated',
+    alive: 'unknown',
+    unknown: 'unknown'
+}
+
+const reducer = (state, stateToMerge) => {
+    const additionalState = stateToMerge.io === 'disconnected' ? defaultState : {}
+    const newState = { ...state, ...stateToMerge, ...additionalState }
+
+    console.log('new state')
+    console.log(newState)
+
+    return newState
+}
+
 const App = () => {
-    const [ioState, setIOState] = useState(socket.connected ? 'connected' : 'disconnected')
-    const [loginState, setLoginState] = useState('unauthenticated')
-    const [aliveStatus, setAliveStatus] = useState('unknown')
+    const [state, dispatch] = useReducer(reducer, defaultState)
 
     const loginHandler = requesterFactory('user.login', [{ id: uuidv4() }], (response) => {
         const result = response.meta.status === 'success' ? 'authenticated' : 'unauthenticated'
 
-        setLoginState(result)
+        dispatch({ login: result })
     })
     const aliveHandler = requesterFactory('system.alive', [], (response) => {
         const status = response.meta.status === 'success' ? 'alive' : 'dead'
 
-        setAliveStatus(status)
+        dispatch({ alive: status })
+    })
+    const unknownHandler = requesterFactory('unknown', [], (response) => {
+        dispatch({ unknown: response.meta.status })
     })
 
     useEffect(() => {
-        setIOState(socket.connected ? 'connected' : 'disconnected')
+        dispatch({ io: socket.connected ? 'connected' : 'disconnected' })
 
-        const connectHandler = () => setIOState('connected')
-        const disconnectHandler = () => setIOState('disconnected')
+        const connectHandler = () => dispatch({ io: 'connected' })
+        const disconnectHandler = () => dispatch({ io: 'disconnected' })
 
         socket.on('connect', connectHandler)
         socket.on('disconnect', disconnectHandler)
@@ -63,13 +81,17 @@ const App = () => {
                     <tr>
                         <td>
                             <button onClick={() => {
-                                socket.connect()
+                                if (state.io === 'connected') {
+                                    socket.disconnect()
+                                } else {
+                                    socket.connect()
+                                }
                             }}>
-                                Connect
+                                { state.io === 'connected' ? 'Disconnect' : 'Connect' }
                             </button>
                         </td>
                         <td>
-                            { ioState }
+                            { state.io }
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +101,7 @@ const App = () => {
                             </button>
                         </td>
                         <td>
-                            { loginState }
+                            { state.login }
                         </td>
                     </tr>
                     <tr>
@@ -89,7 +111,17 @@ const App = () => {
                             </button>
                         </td>
                         <td>
-                            { aliveStatus }
+                            { state.alive }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onClick={unknownHandler}>
+                                Unknown
+                            </button>
+                        </td>
+                        <td>
+                            { state.unknown }
                         </td>
                     </tr>
                 </tbody>

@@ -42,6 +42,24 @@ export default async function initWsServer(httpServer) {
             socket.onAsync(name, handler, options)
         })
 
+        // Special handler. Gets originalEvent as first parameter
+        socket.onAsync('unhandled', async (request) => {
+            const [originalEvent] = request.args
+
+            throw new Error(`Unhandled event '${originalEvent}'`)
+        }, { auth: 'optional' })
+        // 'Unhandled' event handler
+        socket.use((eventArgs, next) => {
+            const eventName = eventArgs[0]
+
+            if (!_.includes(socket.eventNames(), eventName)) {
+                // For this event, change the event name to 'unhandled', and all args one to the right (including original event name)
+                eventArgs.unshift('unhandled')
+            }
+
+            next()
+        })
+
         socket.on('disconnect', () => {
             socket.logger.debug('Disconnected.')
         })
@@ -49,10 +67,6 @@ export default async function initWsServer(httpServer) {
         socket.on('error', (value) => {
             socket.logger.error(value)
         })
-
-        setTimeout(() => {
-            socket.disconnect(true)
-        }, 2000)
     })
 
     return io
