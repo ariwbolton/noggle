@@ -42,7 +42,7 @@
     "@hapi/inert": "^6.0.1",
     "bluebird": "^3.7.2",
     "deep-freeze": "0.0.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "pino": "^6.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
