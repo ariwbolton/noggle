@@ -46,7 +46,7 @@
     "pino": "^6.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "trie-prefix-tree": "^1.5.1",
     "uuid": "^8.0.0"
   }
