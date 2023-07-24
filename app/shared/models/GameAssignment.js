@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 
-import GameWord from './GameWord.js'
+import { GameWord } from './GameWord.js'
 
-export default class GameAssignment {
+export class GameAssignment {
     constructor({ game, user }) {
         this.id = uuidv4()
         this.game = game

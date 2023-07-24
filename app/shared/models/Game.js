@@ -1,10 +1,10 @@
 import _ from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 
-import NoggleGame from '../lib/Noggle/NoggleGame.js'
-import GameAssignment from './GameAssignment.js'
+import { NoggleGame } from '../lib/Noggle/NoggleGame.js'
+import { GameAssignment } from './GameAssignment.js'
 
-export default class Game {
+export class Game {
     constructor({ users, noggle }) {
         const self = this
 

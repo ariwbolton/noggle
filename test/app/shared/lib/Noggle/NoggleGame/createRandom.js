@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
-import NoggleCell from '../../../../../../app/shared/lib/Noggle/NoggleCell.js'
-import NoggleGame from '../../../../../../app/shared/lib/Noggle/NoggleGame.js'
+import { NoggleCell } from '../../../../../../app/shared/lib/Noggle/NoggleCell.js'
+import { NoggleGame } from '../../../../../../app/shared/lib/Noggle/NoggleGame.js'
 
 describe('createRandom', function() {
     it('should create a board correctly using the new dice', function() {

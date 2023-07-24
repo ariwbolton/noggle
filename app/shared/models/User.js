@@ -21,7 +21,7 @@ function getRandomLoginCode() {
     return codeCharacters
 }
 
-export default class User {
+export class User {
     constructor({ username, loginCode } = {}) {
         this.id = uuidv4()
         this.username = username || getRandomUsername()

@@ -1,7 +1,7 @@
 // Temporary database implementation to unblock other work!
 
-import Game from '../shared/models/Game.js'
-import User from '../shared/models/User.js'
+import { Game } from '../shared/models/Game.js'
+import { User } from '../shared/models/User.js'
 
 export const users = []
 export const games = []

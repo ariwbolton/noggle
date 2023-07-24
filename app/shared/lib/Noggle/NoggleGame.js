@@ -3,7 +3,7 @@ import fs from 'fs'
 import _ from 'lodash'
 
 import dictionaryPrefixTree from '../dictionaryPrefixTree.js'
-import NoggleCell from './NoggleCell.js'
+import { NoggleCell } from './NoggleCell.js'
 
 const ITEM_SEPARATOR = ','
 const ROW_SEPARATOR = '|'
@@ -25,7 +25,7 @@ export function fastArrayPrefixMatch(targetArray, prefixCellArray) {
     })
 }
 
-export default class NoggleGame {
+export class NoggleGame {
     constructor() {
         // Empty constructor because the intent is to use setBoard after construction
     }

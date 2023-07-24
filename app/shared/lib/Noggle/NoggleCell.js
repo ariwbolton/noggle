@@ -16,7 +16,7 @@ const DIRECTION_DELTAS = [
 ]
 /* eslint-enable no-multi-spaces */
 
-export default class NoggleCell {
+export class NoggleCell {
     /**
      *
      * @param {NoggleGame} game
