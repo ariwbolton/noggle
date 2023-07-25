@@ -9,10 +9,8 @@ import config from '../../config.js'
  *
  * @param {Object} props
  * @param {PathLike} props.filename
- *
- * @returns {trie}
  */
-function createDictionaryPrefixTrie(props) {
+function createDictionaryPrefixTrie(props: { filename: string }) {
     const fileContents = fs.readFileSync(props.filename, 'utf8')
 
     const words = _(fileContents)
