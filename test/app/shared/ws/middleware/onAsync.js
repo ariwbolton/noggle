@@ -1,6 +1,4 @@
-// import io from 'socket.io-client'
-
-import Servers from '../../../../../app/backend/servers.js'
+import { Servers } from '../../../../../app/backend/servers.ts'
 
 describe('onAsync middleware', function() {
     let servers

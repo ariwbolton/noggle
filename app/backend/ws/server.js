@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import SocketIOServer from 'socket.io'
+import { Server } from 'socket.io'
 
 // Middleware Imports
 import emitAsync from '../../shared/ws/middleware/emitAsync.js'
@@ -23,8 +23,12 @@ const handlers = [
     userLoginHandler
 ]
 
+/**
+ *
+ * @returns {Promise<Server>}
+ */
 export default async function initWsServer(httpServer) {
-    const io = new SocketIOServer(httpServer.listener, {
+    const io = new Server(httpServer.listener, {
         // Engine.io options
         transports: ['websocket']
     })

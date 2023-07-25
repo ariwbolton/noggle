@@ -1,17 +1,23 @@
+import { Server } from 'socket.io'
+import Hapi from '@hapi/hapi'
+
 import logger from '../shared/lib/Logger.js'
 
 import initHttpServer from './http/server.js'
 import initWsServer from './ws/server.js'
 
-export default class Servers {
-    constructor({ http, io }) {
+export class Servers {
+    public http: Hapi.Server
+    public io: Server
+
+    constructor({ http, io }: { http: Hapi.Server, io: Server }) {
         this.http = http
         this.io = io
     }
 
     static async init() {
         const httpServer = await initHttpServer()
-        const socketIoServer = initWsServer(httpServer)
+        const socketIoServer = await initWsServer(httpServer)
 
         return new Servers({
             http: httpServer,

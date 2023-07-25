@@ -1,5 +1,5 @@
-import initServers from '../../app/backend/servers.js'
+import { Servers } from '../../app/backend/servers.ts'
 
 export default async function initServersUtil() {
-    await initServers()
+    await Servers.init()
 }
