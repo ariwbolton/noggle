@@ -130,4 +130,11 @@ const App = () => {
     )
 }
 
-ReactDom.render(<App />, document.getElementById('app'))
+// Mounting via 'body' isn't allowed/recommended
+// Ideally this element would already be in the HTML template, but we're using a default Webpack one, which doesn't have it
+// So we have to create one (else we'd need to create our own HTML template, which I'm hoping to avoid!)
+const root = document.createElement('div')
+
+document.body.appendChild(root)
+
+ReactDom.render(<App />, root)

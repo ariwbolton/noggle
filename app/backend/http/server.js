@@ -1,5 +1,4 @@
 import path from 'path'
-import url from 'url'
 
 import Hapi from '@hapi/hapi'
 import Inert from '@hapi/inert'
@@ -7,8 +6,6 @@ import Inert from '@hapi/inert'
 import config from '../../config.js'
 import logger from '../../shared/lib/Logger.js'
 import routeIndex from './routes/index.js'
-
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
 /**
  *
