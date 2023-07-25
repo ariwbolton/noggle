@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Not Boggle",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "mocha --recursive --exit",
     "lint": "eslint .",
