@@ -6,11 +6,9 @@ import { GameAssignment } from './GameAssignment.js'
 
 export class Game {
     constructor({ users, noggle }) {
-        const self = this
-
         this.id = uuidv4()
         this.gameAssignments = _.map(users, (user) => {
-            return new GameAssignment({ game: self, user })
+            return new GameAssignment({ game: this, user })
         })
 
         this.noggle = noggle || NoggleGame.createRandom()

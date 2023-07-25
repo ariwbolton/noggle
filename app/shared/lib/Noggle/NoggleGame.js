@@ -169,16 +169,15 @@ export class NoggleGame {
         const wordCapsWithQUReplaced = wordCaps.replace(QU_REGEX, 'Q')
         const wordCapsArray = _.toArray(wordCapsWithQUReplaced)
         const cellList = this.getCellList()
-        const self = this
 
         let result = false
 
-        _.each(cellList, function(cell) {
+        _.each(cellList, (cell) => {
             const path = [cell]
             const set = new Set(path)
 
             let shouldContinue = true
-            const isWordPossibleStartingFromCell = self._recurse(wordCapsArray, path, set)
+            const isWordPossibleStartingFromCell = this._recurse(wordCapsArray, path, set)
 
             if (isWordPossibleStartingFromCell) {
                 result = true
@@ -192,8 +191,6 @@ export class NoggleGame {
     }
 
     _recurse(wordCapsArray, currentPath, currentSet) {
-        const self = this
-
         // If the current path is invalid, stop recursing on this branch
         const isPathValidPrefix = fastArrayPrefixMatch(wordCapsArray, currentPath)
 
@@ -211,14 +208,14 @@ export class NoggleGame {
 
         // Otherwise continue recursing. If any match is found, return true. Otherwise, false.
         const currentCell = _.last(currentPath)
-        _.each(currentCell.neighbors, function(neighborCell) {
+        _.each(currentCell.neighbors, (neighborCell) => {
             let shouldContinue = true
 
             if (!currentSet.has(neighborCell)) {
                 currentPath.push(neighborCell)
                 currentSet.add(neighborCell)
 
-                const foundMatch = self._recurse(wordCapsArray, currentPath, currentSet)
+                const foundMatch = this._recurse(wordCapsArray, currentPath, currentSet)
 
                 currentPath.pop()
                 currentSet.delete(neighborCell)

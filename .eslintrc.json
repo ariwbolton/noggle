@@ -5,19 +5,27 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "sourceType": "module",
         "ecmaVersion": 2020,
         "ecmaFeatures": {
             "jsx": true
         }
     },
     "plugins": [
+        "@typescript-eslint",
         "import",
         "implicit-dependencies"
     ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "root": true,
     "rules": {
         "block-scoped-var": 2,
         "brace-style": [
@@ -131,6 +139,13 @@
         "no-unsafe-negation": 2,
         "no-unused-vars": [
             2,
+            {
+                "args": "none",
+                "vars": "all"
+            }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+            "error",
             {
                 "args": "none",
                 "vars": "all"

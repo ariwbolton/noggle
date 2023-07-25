@@ -1,3 +1,4 @@
+/* eslint-disable*/
 declare module 'trie-prefix-tree' {
     export default function trie(input: string[]): Trie
     export interface Trie {
