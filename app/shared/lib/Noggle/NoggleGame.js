@@ -2,7 +2,7 @@ import fs from 'fs'
 
 import _ from 'lodash'
 
-import dictionaryPrefixTree from '../dictionaryPrefixTree.js'
+import { englishWordsTrie } from '../TrieFactory.ts'
 import { NoggleCell } from './NoggleCell.js'
 
 const ITEM_SEPARATOR = ','
@@ -236,7 +236,7 @@ export class NoggleGame {
     }
 
     isWordReal(word) {
-        return dictionaryPrefixTree.hasWord(word)
+        return englishWordsTrie.hasWord(word)
     }
 
     isWordValid(word) {

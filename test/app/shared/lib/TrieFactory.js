@@ -4,10 +4,10 @@ import { TrieFactory, englishWordsTrie } from '../../../../app/shared/lib/TrieFa
 describe('TrieFactory', function() {
     describe('fromFile', function() {
         it('should load from a file', function() {
-            const dictionaryPrefixTree = TrieFactory.fromFile(config.dictionaryPrefixTree.filename)
+            const trie = TrieFactory.fromFile(config.dictionary.filename)
 
             // Pick a random prefix, ensure the number of words is always the same
-            const wordCount = dictionaryPrefixTree.countPrefix('cata')
+            const wordCount = trie.countPrefix('cata')
             expect(wordCount).to.equal(198)
         })
 

@@ -24,4 +24,4 @@ export class TrieFactory {
     }
 }
 
-export const englishWordsTrie = TrieFactory.fromFile(config.dictionaryPrefixTree.filename)
+export const englishWordsTrie = TrieFactory.fromFile(config.dictionary.filename)

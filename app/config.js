@@ -1,7 +1,7 @@
 import deepFreeze from 'deep-freeze'
 
 export default deepFreeze({
-    dictionaryPrefixTree: {
+    dictionary: {
         filename: './data/english-scrabble-dictionary.txt'
     },
     backend: {

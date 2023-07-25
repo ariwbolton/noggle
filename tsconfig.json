@@ -16,9 +16,5 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx"
   },
-  "exclude": ["node_modules", "./dist"],
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "explicit"
-  }
+  "exclude": ["node_modules", "./dist"]
 }
